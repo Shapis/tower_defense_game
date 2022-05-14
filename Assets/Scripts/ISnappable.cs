@@ -2,6 +2,7 @@ using System;
 
 public interface ISnappable
 {
-    // void OnDraggingBegins(object sender, EventArgs e); // Invoked from PlayerItemDragger.cs
-    // void OnDraggingEnds(object sender, EventArgs e); // Invoked from PlayerItemDragger.cs
+    void OnSnap(object sender, Node targetNode); // Invoked from SnapToGrid.cs
+    void OnUnsnap(object sender, Node targetNode); // Invoked from SnapToGrid.cs
+    void OnFailedToSnap(object sender, Node targetNode); // Invoked from SnapToGrid.cs
 }

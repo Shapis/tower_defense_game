@@ -19,4 +19,6 @@ public class Node : MonoBehaviour
     [SerializeField] public Node m_RightDestination;
     [SerializeField] public bool IsTravelNode;
     [SerializeField] public bool IsAccessible = true;
+    [SerializeField] public bool EndGameCrystal = false;
+    [SerializeField] public TowerCatalog.TowerName? m_TowerName = null;
 }

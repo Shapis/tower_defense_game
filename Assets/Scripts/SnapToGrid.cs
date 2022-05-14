@@ -1,14 +1,19 @@
 using System;
 using UnityEngine;
 
-public class SnapToGrid : MonoBehaviour, IDraggableEvents
+public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
 {
     [SerializeField] private string m_ContainerName = "Entities";
     [SerializeField] private bool m_AutoMove = true;
     [SerializeField] private bool m_SnappingActive = true;
     [SerializeField] private Vector3 m_GridSize = new Vector3(.5f, .5f, 1f);
     [SerializeField] private bool m_DebugLogging = false;
+
+    public event EventHandler<Node> OnSnapEvent;
+    public event EventHandler<Node> OnUnsnapEvent;
+    public event EventHandler<Node> OnFailedToSnapEvent;
     private NavMeshGenerator m_NavMesh;
+    private Node _initialDraggingNode;
 
     private InputHandler m_InputHandler;
 
@@ -26,6 +31,21 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents
         }
     }
 
+    public void OnDraggingBegins(object sender, InputHandler.MouseInfo mouseInfo)
+    {
+        foreach (var i in mouseInfo.GameObjectsHit)
+        {
+            foreach (var j in m_NavMesh.GetNodesList())
+            {
+                if (i.GetComponent<Node>() == j)
+                {
+                    _initialDraggingNode = j;
+                    OnUnsnap(this, i.GetComponent<Node>());
+                    return;
+                }
+            }
+        }
+    }
 
     public void OnDraggingEnds(object sender, InputHandler.MouseInfo mouseInfo)
     {
@@ -35,29 +55,66 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents
             {
                 if (i.GetComponent<Node>() == j)
                 {
-                    i.GetComponent<Node>().IsAccessible = false;
-                    return;
+                    if (_initialDraggingNode == j || i.GetComponent<Node>().EndGameCrystal)
+                    {
+                        OnFailedToSnap(this, i.GetComponent<Node>());
+                        return;
+                    }
+                    else if (i.GetComponent<Node>().IsAccessible && GetComponent<Wall>() != null)
+                    {
+                        OnSnap(this, i.GetComponent<Node>());
+                        return;
+                    }
+                    else if (!i.GetComponent<Node>().IsAccessible && i.GetComponent<Node>().m_TowerName == null && GetComponent<Tower>() != null)
+                    {
+                        OnSnap(this, i.GetComponent<Node>());
+                        return;
+                    }
+                    else
+                    {
+                        OnFailedToSnap(this, i.GetComponent<Node>());
+                        return;
+                    }
                 }
             }
         }
+        OnFailedToSnap(this, null);
     }
 
-    private void OnMouseButtonLeftUnpressed(object sender, InputHandler.MouseInfo e)
+    public void OnSnap(object sender, Node targetNode)
     {
-
+        if (GetComponent<Wall>() != null)
+        {
+            targetNode.IsAccessible = false;
+        }
+        else if (GetComponent<Tower>() != null)
+        {
+            targetNode.m_TowerName = GetComponent<Tower>().m_TowerName;
+        }
+        transform.position = targetNode.transform.position;
     }
 
-    private void OnDrawGizmos()
+    public void OnUnsnap(object sender, Node targetNode)
     {
-        if ((this.transform.parent != GameObject.Find(m_ContainerName).transform) && m_AutoMove)
+        if (GetComponent<Wall>() != null)
         {
-            MoveToDirectory();
+            targetNode.IsAccessible = true;
         }
-        if (!Application.isPlaying && transform.hasChanged && m_SnappingActive)
+        else if (GetComponent<Tower>() != null)
         {
-            Snap();
+            targetNode.m_TowerName = null;
         }
+
+        OnUnsnapEvent?.Invoke(sender, targetNode);
     }
+
+    public void OnFailedToSnap(object sender, Node targetNode)
+    {
+        this.gameObject.GetComponent<Draggable>().
+        DestroyThis();
+        OnFailedToSnapEvent?.Invoke(sender, targetNode);
+    }
+
 
     private void MoveToDirectory()
     {
@@ -69,8 +126,19 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents
     }
 
 
+    private void OnDrawGizmos()
+    {
+        if ((this.transform.parent != GameObject.Find(m_ContainerName).transform) && m_AutoMove)
+        {
+            MoveToDirectory();
+        }
+        if (!Application.isPlaying && transform.hasChanged && m_SnappingActive)
+        {
+            SnapSceneEditorOnly();
+        }
+    }
 
-    private void Snap()
+    private void SnapSceneEditorOnly()
     {
         if (m_GridSize.x == 0 || m_GridSize.y == 0 || m_GridSize.z == 0)
         {
@@ -86,9 +154,5 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents
         this.transform.position = _position;
     }
 
-    public void OnDraggingBegins(object sender, InputHandler.MouseInfo mouseInfo)
-    {
-        //throw new NotImplementedException();
-    }
 
 }

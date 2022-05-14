@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Draggable : MonoBehaviour, IDraggableEvents
@@ -15,11 +16,18 @@ public class Draggable : MonoBehaviour, IDraggableEvents
         FindObjectOfType<InputHandler>().OnMouseButtonLeftUnpressedEvent += OnMouseButtonLeftUnpressed;
     }
 
+    public void DestroyThis()
+    {
+        FindObjectOfType<InputHandler>().OnMouseButtonLeftPressedEvent -= OnMouseButtonLeftPressed;
+        FindObjectOfType<InputHandler>().OnMouseHoverEvent -= OnMouseHover;
+        FindObjectOfType<InputHandler>().OnMouseButtonLeftUnpressedEvent -= OnMouseButtonLeftUnpressed;
+        Destroy(gameObject);
+    }
+
     private void OnMouseButtonLeftUnpressed(object sender, InputHandler.MouseInfo e)
     {
         if (_isPickedUp)
         {
-            _isPickedUp = false;
             OnDraggingEnds(this, e);
         }
 
@@ -35,18 +43,34 @@ public class Draggable : MonoBehaviour, IDraggableEvents
 
     private void OnMouseButtonLeftPressed(object sender, InputHandler.MouseInfo e)
     {
+        List<GameObject> towerHits = new List<GameObject>();
+        foreach (var item in e.GameObjectsHit)
+        {
+            if (item.GetComponent<Tower>() != null)
+            {
+                towerHits.Add(item);
+            }
+        }
+
+        if (towerHits.Count > 0 && this.gameObject.GetComponent<Tower>() == null)
+        {
+            return;
+        }
+
         foreach (var item in e.GameObjectsHit)
         {
             if (item.gameObject == gameObject && !_isPickedUp)
             {
-                _isPickedUp = true;
                 OnDraggingBegins(this, e);
             }
         }
+
+
     }
 
     public void OnDraggingBegins(object sender, InputHandler.MouseInfo mouseInfo)
     {
+        _isPickedUp = true;
         if (m_DebugLogging)
         {
             Debug.Log(this.name + " Dragging begins");
@@ -56,6 +80,7 @@ public class Draggable : MonoBehaviour, IDraggableEvents
 
     public void OnDraggingEnds(object sender, InputHandler.MouseInfo mouseInfo)
     {
+        _isPickedUp = false;
         if (m_DebugLogging)
         {
             Debug.Log(this.name + " Dragging ends");

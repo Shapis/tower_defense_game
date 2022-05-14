@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour, IGameHandlerEvents
     {
         yield return new WaitForEndOfFrame(); // This is needed so that the spawner can be placed before the enemies are spawned. Otherwise, the spawner wont find the end crystal node and there will be an object null exception.
         NodePathFinding pathFinding = new NodePathFinding();
-        List<Node> myPath = pathFinding.FindPath(m_Node, FindObjectOfType<EndGameCrystal>().Node, m_NavMeshGenerator.GetNodesList());
+        List<Node> myPath = pathFinding.FindPath(m_Node, FindObjectOfType<EndGameCrystal>().m_Node, m_NavMeshGenerator.GetNodesList());
         for (int i = 0; i < 10; i++)
         {
             yield return new WaitForSeconds(1);
