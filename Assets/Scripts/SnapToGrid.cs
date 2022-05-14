@@ -1,12 +1,51 @@
+using System;
 using UnityEngine;
 
-public class SnapToGrid : MonoBehaviour
+public class SnapToGrid : MonoBehaviour, IDraggableEvents
 {
-    [SerializeField] private string m_ContainerName = "ItemsContainer";
+    [SerializeField] private string m_ContainerName = "Entities";
     [SerializeField] private bool m_AutoMove = true;
     [SerializeField] private bool m_SnappingActive = true;
-    [SerializeField] private Vector3 m_GridSize = new Vector3(1f, 1f, 1f);
+    [SerializeField] private Vector3 m_GridSize = new Vector3(.5f, .5f, 1f);
     [SerializeField] private bool m_DebugLogging = false;
+    private NavMeshGenerator m_NavMesh;
+
+    private InputHandler m_InputHandler;
+
+    private void Awake()
+    {
+        m_NavMesh = FindObjectOfType<NavMeshGenerator>();
+    }
+
+    private void Start()
+    {
+        if (gameObject.GetComponent<Draggable>() != null)
+        {
+            gameObject.GetComponent<Draggable>().OnDraggingBeginsEvent += OnDraggingBegins;
+            gameObject.GetComponent<Draggable>().OnDraggingEndsEvent += OnDraggingEnds;
+        }
+    }
+
+
+    public void OnDraggingEnds(object sender, InputHandler.MouseInfo mouseInfo)
+    {
+        foreach (var i in mouseInfo.GameObjectsHit)
+        {
+            foreach (var j in m_NavMesh.GetNodesList())
+            {
+                if (i.GetComponent<Node>() == j)
+                {
+                    i.GetComponent<Node>().IsAccessible = false;
+                    return;
+                }
+            }
+        }
+    }
+
+    private void OnMouseButtonLeftUnpressed(object sender, InputHandler.MouseInfo e)
+    {
+
+    }
 
     private void OnDrawGizmos()
     {
@@ -29,6 +68,8 @@ public class SnapToGrid : MonoBehaviour
         }
     }
 
+
+
     private void Snap()
     {
         if (m_GridSize.x == 0 || m_GridSize.y == 0 || m_GridSize.z == 0)
@@ -44,4 +85,10 @@ public class SnapToGrid : MonoBehaviour
         ); ;
         this.transform.position = _position;
     }
+
+    public void OnDraggingBegins(object sender, InputHandler.MouseInfo mouseInfo)
+    {
+        //throw new NotImplementedException();
+    }
+
 }

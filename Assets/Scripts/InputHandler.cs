@@ -50,9 +50,11 @@ public class InputHandler : MonoBehaviour
             {
                 GameObjectsHit.Add(hitInfo.collider.gameObject);
             }
-            MousePosition = _mousePosition;
+            ScreenPosition = _mousePosition;
+            WorldPosition = new Vector3(Camera.main.ScreenToWorldPoint(_mousePosition).x, Camera.main.ScreenToWorldPoint(_mousePosition).y, 0f);
         }
-        public Vector2 MousePosition;
+        public Vector2 ScreenPosition;
+        public Vector2 WorldPosition;
         public List<GameObject> GameObjectsHit = new List<GameObject>();
     }
     #endregion
