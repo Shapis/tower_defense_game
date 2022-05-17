@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AmmoPrefabs:
-  - {fileID: 0}
+  - {fileID: 6211889457999171842, guid: 29f05d80a06c8c22292ba9c491102ffe, type: 3}

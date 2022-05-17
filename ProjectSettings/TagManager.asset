@@ -56,3 +56,6 @@ TagManager:
   - name: Enemies
     uniqueID: 344951219
     locked: 0
+  - name: Ammo
+    uniqueID: 1381307199
+    locked: 0

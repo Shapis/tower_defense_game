@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d69718c29f377e78eb026acde0ab8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ContainerName: Entities
+  m_ContainerName: Towers
   m_AutoMove: 1
   m_SnappingActive: 1
   m_GridSize: {x: 0.5, y: 0.5, z: 1}
@@ -65,8 +65,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b5650375afec9c6b8f2cfd5a3a2a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Range: 1
   m_TowerName: 1
+  m_AmmoPrefab: {fileID: 6211889457999171842, guid: 29f05d80a06c8c22292ba9c491102ffe, type: 3}
+  m_Range: 1
+  m_DelayToStartShooting: 0
+  m_TurnSpeed: 1
+  m_DelayBetweenShots: 1
+  m_NumberOfShots: 1
 --- !u!61 &2719022604186434406
 BoxCollider2D:
   m_ObjectHideFlags: 0

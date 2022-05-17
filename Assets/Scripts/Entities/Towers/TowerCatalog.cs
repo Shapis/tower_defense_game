@@ -4,7 +4,6 @@ public class TowerCatalog : MonoBehaviour
 {
     [SerializeField] private GameObject[] m_TowerPrefabs;
 
-
     public enum TowerName
     {
         Wall,
