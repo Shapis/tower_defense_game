@@ -46,13 +46,13 @@ public class Draggable : MonoBehaviour, IDraggableEvents
         List<GameObject> towerHits = new List<GameObject>();
         foreach (var item in e.GameObjectsHit)
         {
-            if (item.GetComponent<Tower>() != null)
+            if (item.GetComponent<BaseTower>() != null)
             {
                 towerHits.Add(item);
             }
         }
 
-        if (towerHits.Count > 0 && this.gameObject.GetComponent<Tower>() == null)
+        if (towerHits.Count > 0 && this.gameObject.GetComponent<BaseTower>() == null)
         {
             return;
         }

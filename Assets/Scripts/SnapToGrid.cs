@@ -4,7 +4,7 @@ using UnityEngine;
 public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
 {
     [SerializeField] private string m_ContainerName = "Entities";
-    [SerializeField] private bool m_AutoMove = true;
+    [SerializeField] private bool m_AutoMove = false;
     [SerializeField] private bool m_SnappingActive = true;
     [SerializeField] private Vector3 m_GridSize = new Vector3(.5f, .5f, 1f);
     [SerializeField] private bool m_DebugLogging = false;
@@ -65,7 +65,7 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
                         OnSnap(this, i.GetComponent<Node>());
                         return;
                     }
-                    else if (!i.GetComponent<Node>().IsAccessible && i.GetComponent<Node>().m_TowerName == null && GetComponent<Tower>() != null)
+                    else if (!i.GetComponent<Node>().IsAccessible && i.GetComponent<Node>().m_TowerName == null && GetComponent<BaseTower>() != null)
                     {
                         OnSnap(this, i.GetComponent<Node>());
                         return;
@@ -87,9 +87,9 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
         {
             targetNode.IsAccessible = false;
         }
-        else if (GetComponent<Tower>() != null)
+        else if (GetComponent<BaseTower>() != null)
         {
-            targetNode.m_TowerName = GetComponent<Tower>().m_TowerName;
+            targetNode.m_TowerName = GetComponent<BaseTower>().TowerName;
         }
         transform.position = targetNode.transform.position;
     }
@@ -100,7 +100,7 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
         {
             targetNode.IsAccessible = true;
         }
-        else if (GetComponent<Tower>() != null)
+        else if (GetComponent<BaseTower>() != null)
         {
             targetNode.m_TowerName = null;
         }

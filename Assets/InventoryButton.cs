@@ -16,7 +16,7 @@ public class InventoryButton : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(m_TowerCatalog.GetTower(m_TowerName).GetComponent<SpriteRenderer>().sprite);
+        // Debug.Log(m_TowerCatalog.GetTower(m_TowerName).GetComponent<SpriteRenderer>().sprite);
         GetComponent<SpriteRenderer>().sprite =
             m_TowerCatalog.GetTower(m_TowerName).GetComponent<SpriteRenderer>().sprite;
         GetComponent<SpriteRenderer>().color =

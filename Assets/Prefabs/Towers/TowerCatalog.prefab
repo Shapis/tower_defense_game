@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2031488333083919512
+--- !u!1 &6020828072844089311
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2031488333083919513}
-  - component: {fileID: -6017341186096077025}
+  - component: {fileID: 6020828072844089305}
+  - component: {fileID: 1045995947136222720}
   m_Layer: 0
-  m_Name: EnemyCatalog
+  m_Name: TowerCatalog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2031488333083919513
+--- !u!4 &6020828072844089305
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031488333083919512}
+  m_GameObject: {fileID: 6020828072844089311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,17 +32,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6017341186096077025
+--- !u!114 &1045995947136222720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031488333083919512}
+  m_GameObject: {fileID: 6020828072844089311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a23a6cd0183ecfe835019ce878982d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1229215b4383e5fa68d9518b8a2eda05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyPrefabs:
-  - {fileID: 4351492564244020527, guid: 6d15be632eee2f50686f7f248471cdb2, type: 3}
+  m_TowerPrefabs:
+  - {fileID: 2959483880967456354, guid: adeebf22e17816d87966139fd2a8932e, type: 3}
+  - {fileID: 2719022604186434424, guid: d1efc266b1624c0abb57cf1fc53b5ccb, type: 3}

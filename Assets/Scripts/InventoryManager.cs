@@ -7,23 +7,18 @@ public class InventoryManager : MonoBehaviour, IDraggableEvents
 {
     [SerializeField] private GameObject[] m_WallsAndTurrets;
 
-    private TowerCatalog m_TowerCatalog;
+
 
     private InputHandler m_InputHandler;
     private void Awake()
     {
         m_InputHandler = FindObjectOfType<InputHandler>();
-        m_TowerCatalog = FindObjectOfType<TowerCatalog>();
+
     }
 
     private void Start()
     {
         m_InputHandler.OnMouseButtonLeftPressedEvent += OnMouseButtonLeftPressed;
-
-        foreach (var item in m_WallsAndTurrets)
-        {
-            item.GetComponent<SpriteRenderer>().sprite = m_TowerCatalog.GetTower(item.GetComponent<InventoryButton>().m_TowerName).GetComponent<SpriteRenderer>().sprite;
-        }
     }
 
     private void OnMouseButtonLeftPressed(object sender, InputHandler.MouseInfo e)

@@ -15,10 +15,10 @@ public class TowerCatalog : MonoBehaviour
     {
         switch (towerName)
         {
-            case TowerName.Wall:
-                return m_TowerPrefabs[0];
             default:
                 return null;
+            case TowerName.Wall:
+                return m_TowerPrefabs[0];
             case TowerName.Tower1:
                 return m_TowerPrefabs[1];
         }

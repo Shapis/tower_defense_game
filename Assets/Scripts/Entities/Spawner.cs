@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnemyCatalog;
 
-public class Spawner : MonoBehaviour, IGameHandlerEvents
+public class Spawner : BaseEntity, IGameHandlerEvents
 {
     [SerializeField] private Vector2Int m_GridPosition = new Vector2Int(0, 0);
-    private Node m_Node;
     private NavMeshGenerator m_NavMeshGenerator;
     private EnemyCatalog m_EnemyCatalog;
 
