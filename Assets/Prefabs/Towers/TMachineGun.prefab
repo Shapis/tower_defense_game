@@ -67,11 +67,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TowerName: 1
   m_AmmoPrefab: {fileID: 6211889457999171842, guid: 29f05d80a06c8c22292ba9c491102ffe, type: 3}
-  m_Range: 1
+  m_AmmoSpawnPoint: []
+  m_Range: 2
   m_DelayToStartShooting: 0
   m_TurnSpeed: 1
-  m_DelayBetweenShots: 1
-  m_NumberOfShots: 1
+  m_DelayBetweenShots: 0.2
+  m_NumberOfShots: 3
+  m_ReloadSpeed: 1
 --- !u!61 &2719022604186434406
 BoxCollider2D:
   m_ObjectHideFlags: 0

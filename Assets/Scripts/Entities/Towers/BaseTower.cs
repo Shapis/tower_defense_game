@@ -12,7 +12,8 @@ public abstract class BaseTower : BaseEntity
     [SerializeField] private float m_DelayToStartShooting = 0f;
     [SerializeField] private float m_TurnSpeed = 1f;
     [SerializeField] private float m_DelayBetweenShots = 0.2f;
-    [SerializeField] private float m_NumberOfShots = 1f;
+    [SerializeField] private int m_NumberOfShots = 1;
+    [SerializeField] private float m_ReloadSpeed = 1f;
 
     protected AmmoCatalog m_AmmoCatalog;
 
@@ -59,6 +60,7 @@ public abstract class BaseTower : BaseEntity
             Shoot(e);
             yield return new WaitForSeconds(m_DelayBetweenShots);
         }
+        yield return new WaitForSeconds(m_ReloadSpeed);
         _isAttacking = false;
     }
 

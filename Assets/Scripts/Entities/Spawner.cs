@@ -58,4 +58,9 @@ public class Spawner : BaseEntity, IGameHandlerEvents
     {
         throw new NotImplementedException();
     }
+
+    public override void Die()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -13,7 +13,12 @@ public class TowerMachineGun : BaseTower
     }
     public override void Shoot(BaseEnemy enemy)
     {
-        GameObject _ammo = Instantiate(m_AmmoPrefab, m_AmmoSpawnPoint[0].position, Quaternion.identity);
-        _ammo.GetComponent<BaseAmmo>().ShootAt(enemy);
+        GameObject _ammoPrefab = Instantiate(m_AmmoPrefab, m_AmmoSpawnPoint[0].position, Quaternion.identity);
+        _ammoPrefab.GetComponent<BaseAmmo>().Target = enemy;
+    }
+
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Wall : BaseEntity
 {
-
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }

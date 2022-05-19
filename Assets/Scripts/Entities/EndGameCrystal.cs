@@ -7,6 +7,10 @@ public class EndGameCrystal : BaseEntity
     [SerializeField] private Vector2Int m_GridPosition = new Vector2Int(0, 0);
     private NavMeshGenerator m_NavMeshGenerator;
 
+    public override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 
     private void Awake()
     {
