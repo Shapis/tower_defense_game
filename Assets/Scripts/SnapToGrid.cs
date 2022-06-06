@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
+public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable, IGameHandlerEvents
 {
     [SerializeField] private string m_ContainerName = "Entities";
     [SerializeField] private bool m_AutoMove = false;
@@ -154,5 +154,23 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
         this.transform.position = _position;
     }
 
+    public void OnGamePause(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 
+    public void OnGameResume(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnRoundBegins(object sender, EventArgs e)
+    {
+        //OnFailedToSnap(this, null);
+    }
+
+    public void OnRoundEnds(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class BaseEnemy : BaseEntity
@@ -8,5 +10,21 @@ public abstract class BaseEnemy : BaseEntity
         {
             TakeDamage(other.gameObject.GetComponent<BaseAmmo>().Damage);
         }
+        else if (other.gameObject.GetComponent<EndGameCrystal>() is not null)
+        {
+            Die();
+        }
+    }
+
+    public override void Die()
+    {
+        GetComponent<UnitNodeMovement>().StopAllCoroutines();
+        StartCoroutine(DestroyAfterTime(1f));
+    }
+
+    private IEnumerator DestroyAfterTime(float v)
+    {
+        yield return new WaitForSeconds(v);
+        Destroy(gameObject);
     }
 }

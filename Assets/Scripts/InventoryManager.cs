@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TowerCatalog;
-public class InventoryManager : MonoBehaviour, IDraggableEvents
+public class InventoryManager : MonoBehaviour, IDraggableEvents, IGameHandlerEvents
 {
     [SerializeField] private GameObject[] m_WallsAndTurrets;
 
 
 
     private InputHandler m_InputHandler;
+    private bool _isRoundInProgress;
+
     private void Awake()
     {
         m_InputHandler = FindObjectOfType<InputHandler>();
@@ -19,10 +21,17 @@ public class InventoryManager : MonoBehaviour, IDraggableEvents
     private void Start()
     {
         m_InputHandler.OnMouseButtonLeftPressedEvent += OnMouseButtonLeftPressed;
+        GameHandler.OnRoundBeginsEvent += OnRoundBegins;
+        GameHandler.OnRoundEndsEvent += OnRoundEnds;
     }
 
     private void OnMouseButtonLeftPressed(object sender, InputHandler.MouseInfo e)
     {
+        if (_isRoundInProgress)
+        {
+            return;
+        }
+
         foreach (var i in e.GameObjectsHit)
         {
             for (int j = 0; j < m_WallsAndTurrets.Length; j++)
@@ -51,5 +60,25 @@ public class InventoryManager : MonoBehaviour, IDraggableEvents
     public void OnDraggingEnds(object sender, InputHandler.MouseInfo mouseInfo)
     {
         throw new NotImplementedException();
+    }
+
+    public void OnGamePause(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnGameResume(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnRoundBegins(object sender, EventArgs e)
+    {
+        _isRoundInProgress = true;
+    }
+
+    public void OnRoundEnds(object sender, EventArgs e)
+    {
+        _isRoundInProgress = false;
     }
 }

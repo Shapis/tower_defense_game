@@ -2,18 +2,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Draggable : MonoBehaviour, IDraggableEvents
+public class Draggable : MonoBehaviour, IDraggableEvents, IGameHandlerEvents
 {
 
     [SerializeField] private bool m_DebugLogging = false;
     public event EventHandler<InputHandler.MouseInfo> OnDraggingBeginsEvent;
     public event EventHandler<InputHandler.MouseInfo> OnDraggingEndsEvent;
     private bool _isPickedUp = false;
+    private bool _isRoundInProgress = false;
     private void Start()
     {
         FindObjectOfType<InputHandler>().OnMouseButtonLeftPressedEvent += OnMouseButtonLeftPressed;
         FindObjectOfType<InputHandler>().OnMouseHoverEvent += OnMouseHover;
         FindObjectOfType<InputHandler>().OnMouseButtonLeftUnpressedEvent += OnMouseButtonLeftUnpressed;
+        GameHandler.OnRoundBeginsEvent += OnRoundBegins;
+        GameHandler.OnRoundEndsEvent += OnRoundEnds;
     }
 
     public void DestroyThis()
@@ -43,6 +46,10 @@ public class Draggable : MonoBehaviour, IDraggableEvents
 
     private void OnMouseButtonLeftPressed(object sender, InputHandler.MouseInfo e)
     {
+        if (_isRoundInProgress)
+        {
+            return;
+        }
         List<GameObject> towerHits = new List<GameObject>();
         foreach (var item in e.GameObjectsHit)
         {
@@ -86,5 +93,25 @@ public class Draggable : MonoBehaviour, IDraggableEvents
             Debug.Log(this.name + " Dragging ends");
         }
         OnDraggingEndsEvent?.Invoke(sender, mouseInfo);
+    }
+
+    public void OnGamePause(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnGameResume(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnRoundBegins(object sender, EventArgs e)
+    {
+        _isRoundInProgress = true;
+    }
+
+    public void OnRoundEnds(object sender, EventArgs e)
+    {
+        _isRoundInProgress = false;
     }
 }

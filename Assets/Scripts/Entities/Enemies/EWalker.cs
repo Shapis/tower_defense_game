@@ -1,7 +1,8 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
 public class EWalker : BaseEnemy
 {
-    public override void Die()
-    {
-        //Destroy(gameObject);
-    }
+
 }
