@@ -18,8 +18,8 @@ public class InventoryButton : MonoBehaviour
     {
         // Debug.Log(m_TowerCatalog.GetTower(m_TowerName).GetComponent<SpriteRenderer>().sprite);
         GetComponent<SpriteRenderer>().sprite =
-            m_TowerCatalog.GetTower(m_TowerName).GetComponent<SpriteRenderer>().sprite;
+            m_TowerCatalog.GetTower(m_TowerName).GetComponentInChildren<SpriteRenderer>().sprite;
         GetComponent<SpriteRenderer>().color =
-        m_TowerCatalog.GetTower(m_TowerName).GetComponent<SpriteRenderer>().color;
+        m_TowerCatalog.GetTower(m_TowerName).GetComponentInChildren<SpriteRenderer>().color;
     }
 }

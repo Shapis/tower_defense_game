@@ -15,7 +15,7 @@ public class RoundInformation : MonoBehaviour, IGameHandlerEvents
     }
     private void Update()
     {
-        GetComponent<TextMeshPro>().text = "Round: " + _roundNumber + " / " + "Enemies: " + FindObjectsOfType<BaseEnemy>().Length;
+        GetComponent<TextMeshPro>().text = "Round: " + _roundNumber;
 
         if (_isRoundInProgress && FindObjectsOfType<BaseEnemy>().Length > 0)
         {
@@ -41,6 +41,7 @@ public class RoundInformation : MonoBehaviour, IGameHandlerEvents
 
     public void OnRoundBegins(object sender, EventArgs e)
     {
+        _roundNumber++;
         _isRoundInProgress = true;
     }
 
