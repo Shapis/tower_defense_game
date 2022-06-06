@@ -5,12 +5,12 @@ using UnityEngine;
 public abstract class BaseAmmo : BaseEntity
 {
     private BaseEnemy _target;
-    [SerializeField] protected float m_Damage = 1f;
+    [SerializeField] private float m_Damage = 1f;
     [SerializeField] public float m_Speed = 10f;
     protected abstract IEnumerator CreateTrajetory();
 
     public BaseEnemy Target { get => _target; set => _target = value; }
-
+    public float Damage { get => m_Damage; private set => m_Damage = value; }
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public abstract class BaseAmmo : BaseEntity
     }
 
     // Describes the movement of the ammo towards the target.
-    public void ShootAt(IEnumerator trajectory)
+    private void ShootAt(IEnumerator trajectory)
     {
         StartCoroutine(trajectory);
     }

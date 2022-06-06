@@ -23,6 +23,7 @@ public class Spawner : BaseEntity, IGameHandlerEvents
     {
         m_Node = m_NavMeshGenerator.Grid[m_GridPosition.x, m_GridPosition.y];
         transform.position = m_Node.transform.position;
+        m_Node.IsAccessible = false;
     }
 
     private IEnumerator SpawnEnemies()

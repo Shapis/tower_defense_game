@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b5650375afec9c6b8f2cfd5a3a2a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Health: 10
   m_TowerName: 1
   m_AmmoPrefab: {fileID: 6211889457999171842, guid: 29f05d80a06c8c22292ba9c491102ffe, type: 3}
   m_AmmoSpawnPoint: []

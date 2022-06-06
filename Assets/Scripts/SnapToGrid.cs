@@ -118,7 +118,7 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable
 
     private void MoveToDirectory()
     {
-        this.transform.parent = GameObject.Find(m_ContainerName).transform;
+        this.transform.SetParent(GameObject.Find(m_ContainerName).transform);
         if (m_DebugLogging)
         {
             Debug.Log(this.gameObject + " moved to " + m_ContainerName);

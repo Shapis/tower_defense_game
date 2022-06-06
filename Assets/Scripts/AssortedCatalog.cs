@@ -7,6 +7,7 @@ public class AssortedCatalog : MonoBehaviour
     public enum AssortedPrefab
     {
         DamagePopUp,
+        HealthBar,
 
     }
 
@@ -18,7 +19,8 @@ public class AssortedCatalog : MonoBehaviour
                 return null;
             case AssortedPrefab.DamagePopUp:
                 return m_AssortedPrefabs[0];
-
+            case AssortedPrefab.HealthBar:
+                return m_AssortedPrefabs[1];
         }
     }
 }
