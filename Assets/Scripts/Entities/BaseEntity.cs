@@ -2,14 +2,19 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public abstract class BaseEntity : MonoBehaviour
 {
     public Node m_Node { get; set; }
+    public bool IsAlive { get; private set; } = true;
+
     [SerializeField]
     private float m_Health = 10f;
     private float _currentHealth;
     private GameObject _healthBar;
+
+    private List<GameObject> _damagePopUps = new List<GameObject>();
 
 
     private void Start()
@@ -46,6 +51,7 @@ public abstract class BaseEntity : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
+            IsAlive = false;
             Die();
         }
     }
@@ -56,6 +62,7 @@ public abstract class BaseEntity : MonoBehaviour
     {
         GameObject _go = FindObjectOfType<AssortedCatalog>().GetAssortedPrefab(AssortedCatalog.AssortedPrefab.DamagePopUp);
         GameObject _damagePopUp = Instantiate(_go, transform.position, Quaternion.identity);
+        _damagePopUps.Add(_damagePopUp);
 
         TextMeshPro _textMeshPro = _damagePopUp.GetComponent<TextMeshPro>();
         _textMeshPro.text = damageTaken.ToString();
@@ -74,7 +81,7 @@ public abstract class BaseEntity : MonoBehaviour
             _offsetY += 1f * Time.deltaTime;
             yield return null;
         }
-
+        _damagePopUps.Remove(_damagePopUp);
         Destroy(_damagePopUp);
     }
 

@@ -33,7 +33,6 @@ public class Healthbar : MonoBehaviour
 
     public void UpdateHealth(float healthPercentage)
     {
-        Debug.Log(healthPercentage);
         m_Healthbar.localPosition = new Vector3(
             -(1f - healthPercentage) / 2f,
             0,

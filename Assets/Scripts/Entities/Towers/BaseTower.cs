@@ -33,10 +33,9 @@ public abstract class BaseTower : BaseEntity
     {
         foreach (var item in FindObjectsOfType<BaseEnemy>())
         {
-            if (Vector2.Distance(item.transform.position, transform.position) <= m_Range)
+            if (Vector2.Distance(item.transform.position, transform.position) <= m_Range && item.IsAlive)
             {
                 EnemyInRange(this, item);
-
             }
         }
     }

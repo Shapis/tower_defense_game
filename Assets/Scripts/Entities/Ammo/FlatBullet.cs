@@ -24,7 +24,7 @@ public class FlatBullet : BaseAmmo
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<BaseEnemy>() != null)
+        if (other.gameObject.GetComponent<BaseEnemy>() != null && other.gameObject.GetComponent<BaseEnemy>().IsAlive)
         {
             //  Debug.Log(other.gameObject.name);
             Destroy(this.gameObject);
