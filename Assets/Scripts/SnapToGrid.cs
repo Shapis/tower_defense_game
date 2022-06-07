@@ -29,6 +29,7 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable, IGameHand
             gameObject.GetComponent<Draggable>().OnDraggingBeginsEvent += OnDraggingBegins;
             gameObject.GetComponent<Draggable>().OnDraggingEndsEvent += OnDraggingEnds;
         }
+        MoveToDirectory();
     }
 
     public void OnDraggingBegins(object sender, InputHandler.MouseInfo mouseInfo)

@@ -1,13 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static TowerCatalog;
+
 public class InventoryManager : MonoBehaviour, IDraggableEvents, IGameHandlerEvents
 {
     [SerializeField] private GameObject[] m_WallsAndTurrets;
-
-
 
     private InputHandler m_InputHandler;
     private bool _isRoundInProgress;
@@ -47,6 +43,7 @@ public class InventoryManager : MonoBehaviour, IDraggableEvents, IGameHandlerEve
 
     private void GenerateEntity(GameObject inventorySlot, InputHandler.MouseInfo e)
     {
+        Debug.Log("here");
         GameObject _go;
         _go = Instantiate(FindObjectOfType<TowerCatalog>().GetTower(inventorySlot.GetComponent<InventoryButton>().m_TowerName), new Vector3(e.WorldPosition.x, e.WorldPosition.y, 0), Quaternion.identity);
         _go.GetComponent<Draggable>().OnDraggingBegins(this, e);

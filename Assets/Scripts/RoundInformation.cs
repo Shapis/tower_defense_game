@@ -47,7 +47,6 @@ public class RoundInformation : MonoBehaviour, IGameHandlerEvents
 
     public void OnRoundEnds(object sender, EventArgs e)
     {
-        Debug.Log("here");
         GameHandler.RoundEnds();
     }
 }
