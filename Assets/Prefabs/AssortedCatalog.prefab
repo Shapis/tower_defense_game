@@ -47,3 +47,6 @@ MonoBehaviour:
   m_AssortedPrefabs:
   - {fileID: 403935479969403600, guid: d86ed52b55f5c4b01b2cc468adb0e8fa, type: 3}
   - {fileID: 5039888808042406102, guid: d0aeb48f7063e604e99da58ea7cedfc0, type: 3}
+  m_TileSprites:
+  - {fileID: 21300000, guid: 85e3052c177010c20ad38ca995abaf14, type: 3}
+  - {fileID: 21300000, guid: 0ceeb120d7b550620a549fdf4f005496, type: 3}

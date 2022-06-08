@@ -2,8 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class BaseEnemy : BaseEntity
+public abstract class BaseEnemy : BaseEntity, INodeMovementEvents
 {
+    private void Start()
+    {
+        GetComponent<UnitNodeMovement>().OnDestinationNodeReachedEvent += OnDestinationNodeReachedEvent;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<BaseAmmo>() is not null)
@@ -26,5 +30,40 @@ public abstract class BaseEnemy : BaseEntity
     {
         yield return new WaitForSeconds(v);
         Destroy(gameObject);
+    }
+
+    public void OnTravelNodeReached(object sender, Node node)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnTravelNodeDeparted(object sender, Node node)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnDestinationNodeReachedEvent(object sender, Node node)
+    {
+        SafeUpdateRotation();
+    }
+
+    public void OnDestinationNodeDepartedEvent(object sender, Node node)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnDestinationNotAccessibleEvent(object sender, Node node)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnNoDestinationFoundEvent(object sender, string destinationName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnFinalDestinationNodeReached(object sender, Node node)
+    {
+        throw new NotImplementedException();
     }
 }

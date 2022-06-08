@@ -22,6 +22,43 @@ public abstract class BaseEntity : MonoBehaviour
         _currentHealth = m_Health;
     }
 
+    // private IEnumerator SafeUpdateRotation(Vector3 direction)
+    // {
+    //     yield return null;
+    //     transform.rotation = Quaternion.LookRotation(direction);
+    //     this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.x - 90f);
+
+    // }
+
+    protected void UpdateRotation(Vector3 direction)
+    {
+        transform.rotation = Quaternion.LookRotation(direction);
+        this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.x - 90f);
+    }
+
+    protected void SafeUpdateRotation()
+    {
+        StartCoroutine(SafeUpdateRoutine());
+    }
+
+    private List<Node> FindPath()
+    {
+        if (m_Node == null)
+        {
+            Debug.Log(this);
+        }
+        NodePathFinding pathFinding = new NodePathFinding();
+        List<Node> myPath = pathFinding.FindPath(m_Node, FindObjectOfType<EndGameCrystal>().m_Node, FindObjectOfType<NavMeshGenerator>().GetNodesList());
+        return myPath;
+    }
+
+    private IEnumerator SafeUpdateRoutine()
+    {
+        yield return null;
+        Vector3 direction = FindPath()[1].transform.position - FindPath()[0].transform.position;
+        transform.rotation = Quaternion.LookRotation(direction);
+        this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.x - 90f);
+    }
 
     private bool _healthBarShowing = false;
 

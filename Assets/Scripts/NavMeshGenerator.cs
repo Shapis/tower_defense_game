@@ -21,7 +21,6 @@ public class NavMeshGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
         // Generate main grid
         for (int i = 0; i < 14; i++)
         {

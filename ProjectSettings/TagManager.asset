@@ -50,9 +50,6 @@ TagManager:
   - name: Towers
     uniqueID: 3111074145
     locked: 0
-  - name: Spawner
-    uniqueID: 2055530255
-    locked: 0
   - name: Enemies
     uniqueID: 344951219
     locked: 0
@@ -61,4 +58,10 @@ TagManager:
     locked: 0
   - name: Popups
     uniqueID: 1997207837
+    locked: 0
+  - name: Inventory
+    uniqueID: 3094958487
+    locked: 0
+  - name: Draggables
+    uniqueID: 1869881715
     locked: 0

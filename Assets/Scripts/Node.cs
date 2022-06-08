@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static AssortedCatalog;
 
 public class Node : MonoBehaviour
 {
@@ -19,6 +20,24 @@ public class Node : MonoBehaviour
     [SerializeField] public Node m_RightDestination;
     [SerializeField] public bool IsTravelNode;
     [SerializeField] public bool IsAccessible = true;
-    [SerializeField] public bool EndGameCrystal = false;
     [SerializeField] public TowerCatalog.TowerName? m_TowerName = null;
+
+    private void Start()
+    {
+        PickSprite();
+    }
+
+    private void PickSprite()
+    {
+        if (UnityEngine.Random.Range(0, 1) < 1)
+        {
+            GetComponent<SpriteRenderer>().sprite =
+        FindObjectOfType<AssortedCatalog>().GetAssortedTile(AssortedTile.Green1);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite =
+                    FindObjectOfType<AssortedCatalog>().GetAssortedTile(AssortedTile.Green2);
+        }
+    }
 }

@@ -56,7 +56,7 @@ public class SnapToGrid : MonoBehaviour, IDraggableEvents, ISnappable, IGameHand
             {
                 if (i.GetComponent<Node>() == j)
                 {
-                    if (_initialDraggingNode == j || i.GetComponent<Node>().EndGameCrystal)
+                    if (_initialDraggingNode == j || i.GetComponent<EndGameCrystal>() != null)
                     {
                         OnFailedToSnap(this, i.GetComponent<Node>());
                         return;

@@ -23,7 +23,7 @@ public class InventoryManager : MonoBehaviour, IDraggableEvents, IGameHandlerEve
 
     private void OnMouseButtonLeftPressed(object sender, InputHandler.MouseInfo e)
     {
-        if (_isRoundInProgress)
+        if (_isRoundInProgress || GameHandler.isPaused)
         {
             return;
         }
@@ -43,7 +43,6 @@ public class InventoryManager : MonoBehaviour, IDraggableEvents, IGameHandlerEve
 
     private void GenerateEntity(GameObject inventorySlot, InputHandler.MouseInfo e)
     {
-        Debug.Log("here");
         GameObject _go;
         _go = Instantiate(FindObjectOfType<TowerCatalog>().GetTower(inventorySlot.GetComponent<InventoryButton>().m_TowerName), new Vector3(e.WorldPosition.x, e.WorldPosition.y, 0), Quaternion.identity);
         _go.GetComponent<Draggable>().OnDraggingBegins(this, e);

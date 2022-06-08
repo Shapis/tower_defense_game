@@ -10,6 +10,8 @@ public class Draggable : MonoBehaviour, IDraggableEvents, IGameHandlerEvents
     public event EventHandler<InputHandler.MouseInfo> OnDraggingEndsEvent;
     private bool _isPickedUp = false;
     private bool _isRoundInProgress = false;
+
+    private string _originalSortingLayer;
     private void Start()
     {
         FindObjectOfType<InputHandler>().OnMouseButtonLeftPressedEvent += OnMouseButtonLeftPressed;
@@ -77,6 +79,15 @@ public class Draggable : MonoBehaviour, IDraggableEvents, IGameHandlerEvents
 
     public void OnDraggingBegins(object sender, InputHandler.MouseInfo mouseInfo)
     {
+        foreach (var item in GetComponentsInChildren<SpriteRenderer>())
+        {
+            _originalSortingLayer = item.sortingLayerName;
+        }
+        foreach (var item in GetComponentsInChildren<SpriteRenderer>())
+        {
+            item.sortingLayerName = "Draggables";
+        }
+
         _isPickedUp = true;
         if (m_DebugLogging)
         {
@@ -87,6 +98,10 @@ public class Draggable : MonoBehaviour, IDraggableEvents, IGameHandlerEvents
 
     public void OnDraggingEnds(object sender, InputHandler.MouseInfo mouseInfo)
     {
+        foreach (var item in GetComponentsInChildren<SpriteRenderer>())
+        {
+            item.sortingLayerName = _originalSortingLayer;
+        }
         _isPickedUp = false;
         if (m_DebugLogging)
         {

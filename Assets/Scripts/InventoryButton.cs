@@ -4,7 +4,7 @@ using static TowerCatalog;
 public class InventoryButton : MonoBehaviour
 {
     [SerializeField] public TowerName m_TowerName;
-    [SerializeField] public Sprite m_Sprite;
+    [SerializeField] private SpriteRenderer m_SpriteRenderer;
     private TowerCatalog m_TowerCatalog;
 
     private void Awake()
@@ -14,10 +14,7 @@ public class InventoryButton : MonoBehaviour
 
     private void Start()
     {
+        m_SpriteRenderer.sprite = m_TowerCatalog.GetTower(m_TowerName).GetComponentInChildren<SpriteRenderer>().sprite;
 
-        GetComponent<SpriteRenderer>().sprite =
-            m_TowerCatalog.GetTower(m_TowerName).GetComponentInChildren<SpriteRenderer>().sprite;
-        GetComponent<SpriteRenderer>().color =
-        m_TowerCatalog.GetTower(m_TowerName).GetComponentInChildren<SpriteRenderer>().color;
     }
 }

@@ -21,7 +21,6 @@ public class EndGameCrystal : BaseEntity
     void Start()
     {
         m_Node = m_NavMeshGenerator.Grid[m_GridPosition.x, m_GridPosition.y];
-        m_Node.EndGameCrystal = true;
         transform.position = m_Node.transform.position;
     }
 }
