@@ -6,6 +6,7 @@ public abstract class BaseEnemy : BaseEntity, INodeMovementEvents
 {
     private void Start()
     {
+        SafeUpdateRotation();
         GetComponent<UnitNodeMovement>().OnDestinationNodeReachedEvent += OnDestinationNodeReachedEvent;
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,6 +45,7 @@ public abstract class BaseEnemy : BaseEntity, INodeMovementEvents
 
     public void OnDestinationNodeReachedEvent(object sender, Node node)
     {
+        m_Node = node;
         SafeUpdateRotation();
     }
 

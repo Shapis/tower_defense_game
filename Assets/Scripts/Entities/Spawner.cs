@@ -35,6 +35,7 @@ public class Spawner : BaseEntity, IGameHandlerEvents, ISnappable
         {
             yield return new WaitForSeconds(1);
             GameObject unit = Instantiate(m_EnemyCatalog.GetEnemy(EnemyName.Enemy1), m_Node.transform.position, Quaternion.identity);
+            unit.GetComponent<BaseEntity>().m_Node = m_Node;
 
             unit.GetComponent<UnitNodeMovement>().FollowPath(FindPath());
         }

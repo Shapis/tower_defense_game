@@ -16,24 +16,10 @@ public abstract class BaseEntity : MonoBehaviour
 
     private List<GameObject> _damagePopUps = new List<GameObject>();
 
-
-    private void Start()
-    {
-        _currentHealth = m_Health;
-    }
-
-    // private IEnumerator SafeUpdateRotation(Vector3 direction)
-    // {
-    //     yield return null;
-    //     transform.rotation = Quaternion.LookRotation(direction);
-    //     this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.x - 90f);
-
-    // }
-
     protected void UpdateRotation(Vector3 direction)
     {
         transform.rotation = Quaternion.LookRotation(direction);
-        this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.x - 90f);
+        this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.y + 180f);
     }
 
     protected void SafeUpdateRotation()
@@ -57,7 +43,7 @@ public abstract class BaseEntity : MonoBehaviour
         yield return null;
         Vector3 direction = FindPath()[1].transform.position - FindPath()[0].transform.position;
         transform.rotation = Quaternion.LookRotation(direction);
-        this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.x - 90f);
+        this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.y + 180f);
     }
 
     private bool _healthBarShowing = false;
